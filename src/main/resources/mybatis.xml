@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration> <!--配置 mybatis 环境-->
+    <!--配置日志，注意顺序：查看属性点击configuration进入查看即可-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+</configuration>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhou.mapper.GamerecordMapper">
+  <resultMap id="BaseResultMap" type="com.zhou.pojo.Gamerecord">
+    <id column="recordId" jdbcType="VARCHAR" property="recordId" />
+    <result column="homeTeamId" jdbcType="INTEGER" property="homeTeamId" />
+    <result column="gameDate" jdbcType="TIMESTAMP" property="gameDate" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="visitingTeamId" jdbcType="INTEGER" property="visitingTeamId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    recordId, homeTeamId, gameDate, score, visitingTeamId
+  </sql>
+  <select id="selectByExample" parameterType="com.zhou.pojo.GamerecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gamerecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gamerecord
+    where recordId = #{recordId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from gamerecord
+    where recordId = #{recordId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zhou.pojo.GamerecordExample">
+    delete from gamerecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zhou.pojo.Gamerecord">
+    insert into gamerecord (recordId, homeTeamId, gameDate, 
+      score, visitingTeamId)
+    values (#{recordId,jdbcType=VARCHAR}, #{homeTeamId,jdbcType=INTEGER}, #{gameDate,jdbcType=TIMESTAMP}, 
+      #{score,jdbcType=INTEGER}, #{visitingTeamId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhou.pojo.Gamerecord">
+    insert into gamerecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recordId != null">
+        recordId,
+      </if>
+      <if test="homeTeamId != null">
+        homeTeamId,
+      </if>
+      <if test="gameDate != null">
+        gameDate,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="visitingTeamId != null">
+        visitingTeamId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recordId != null">
+        #{recordId,jdbcType=VARCHAR},
+      </if>
+      <if test="homeTeamId != null">
+        #{homeTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="gameDate != null">
+        #{gameDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="visitingTeamId != null">
+        #{visitingTeamId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhou.pojo.GamerecordExample" resultType="java.lang.Long">
+    select count(*) from gamerecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gamerecord
+    <set>
+      <if test="record.recordId != null">
+        recordId = #{record.recordId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeTeamId != null">
+        homeTeamId = #{record.homeTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="record.gameDate != null">
+        gameDate = #{record.gameDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.visitingTeamId != null">
+        visitingTeamId = #{record.visitingTeamId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gamerecord
+    set recordId = #{record.recordId,jdbcType=VARCHAR},
+      homeTeamId = #{record.homeTeamId,jdbcType=INTEGER},
+      gameDate = #{record.gameDate,jdbcType=TIMESTAMP},
+      score = #{record.score,jdbcType=INTEGER},
+      visitingTeamId = #{record.visitingTeamId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhou.pojo.Gamerecord">
+    update gamerecord
+    <set>
+      <if test="homeTeamId != null">
+        homeTeamId = #{homeTeamId,jdbcType=INTEGER},
+      </if>
+      <if test="gameDate != null">
+        gameDate = #{gameDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="visitingTeamId != null">
+        visitingTeamId = #{visitingTeamId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where recordId = #{recordId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhou.pojo.Gamerecord">
+    update gamerecord
+    set homeTeamId = #{homeTeamId,jdbcType=INTEGER},
+      gameDate = #{gameDate,jdbcType=TIMESTAMP},
+      score = #{score,jdbcType=INTEGER},
+      visitingTeamId = #{visitingTeamId,jdbcType=INTEGER}
+    where recordId = #{recordId,jdbcType=VARCHAR}
+  </update>
+</mapper>
