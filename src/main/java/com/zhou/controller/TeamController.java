@@ -31,7 +31,6 @@ public class TeamController {
 
     @Resource
     private TeamService teamService;
-    private Integer teamId;
 
     //如果没加日期格式化注解，就把此代码解开，日期格式化。
 /*    @InitBinder
